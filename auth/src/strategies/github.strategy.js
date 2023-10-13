@@ -1,13 +1,17 @@
 const { Strategy: GithubStrategy } = require("passport-github2");
 const User = require("../models/User");
 const getTokens = require("../utils");
-const { GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET } = require("../credentials");
+const {
+  GITHUB_CLIENT_ID,
+  GITHUB_CLIENT_SECRET,
+  GITHUB_CALLBACK_URL,
+} = require("../credentials");
 
 const githubStrategy = new GithubStrategy(
   {
     clientID: GITHUB_CLIENT_ID,
     clientSecret: GITHUB_CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/api/auth/github/callback",
+    callbackURL: GITHUB_CALLBACK_URL,
     session: false,
     scope: ["profile", "user:email"],
   },

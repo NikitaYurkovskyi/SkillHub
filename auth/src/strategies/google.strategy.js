@@ -1,13 +1,17 @@
 const { Strategy: GoogleStrategy } = require("passport-google-oauth20");
 const User = require("../models/User");
 const getTokens = require("../utils");
-const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } = require("../credentials");
+const {
+  GOOGLE_CLIENT_ID,
+  GOOGLE_CLIENT_SECRET,
+  GOOGLE_CALLBACK_URL,
+} = require("../credentials");
 
 const googleStrategy = new GoogleStrategy(
   {
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/api/auth/google/callback",
+    callbackURL: GOOGLE_CALLBACK_URL,
     session: false,
     // passReqToCallback: true,
     scope: ["profile", "user:email"],
