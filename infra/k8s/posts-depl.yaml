@@ -15,6 +15,7 @@ spec:
       containers:
         - name: posts
           image: emilevi4/avpz.posts
+          # TODO:Check this manifest
 ---
 apiVersion: v1
 kind: Service
