@@ -1,10 +1,29 @@
 import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { clearUserData, fetchUserData } from "../features/user/userSlice";
+import { useEffect } from "react";
 
 function Header() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  console.log(location.pathname);
+  const userData = useSelector((state) => state.user.userData);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchUserData());
+  }, [dispatch]);
+
+  const logout = () => {
+    const sure = window.confirm("Are you sure you want to logout?");
+    if (sure) {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+      dispatch(clearUserData());
+      navigate("/");
+    }
+  };
 
   if (location.pathname === "/signin" || location.pathname === "/signup")
     return null;
@@ -21,14 +40,23 @@ function Header() {
           className="w-3 shrink-0"
         />
       </div>
-      <button className="overflow-hidden bg-[#003b93] flex flex-col w-20 shrink-0 h-8 items-start pl-5 py-2 rounded-[749.2500610351562px]">
+      {userData && userData.username ? (
+        <span
+          onClick={() => logout()}
+          className="bg-[#003b93] px-1 py-1 text-white rounded-md"
+        >
+          {userData.username}
+        </span>
+      ) : (
         <button
           onClick={() => navigate("/signin")}
-          className="text-xs font-['Montserrat'] font-semibold text-[#d2d2d4]"
+          className="overflow-hidden bg-[#003b93] flex flex-col w-20 shrink-0 h-8 items-start pl-5 py-2 rounded-[749.2500610351562px]"
         >
-          Log In
+          <span className="text-xs font-['Montserrat'] font-semibold text-[#d2d2d4]">
+            Log In
+          </span>
         </button>
-      </button>
+      )}
     </div>
   );
 }

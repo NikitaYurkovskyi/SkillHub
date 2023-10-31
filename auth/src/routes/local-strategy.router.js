@@ -23,13 +23,13 @@ router
   )
   .post("/signup", signupValidation(), async (req, res, next) => {
     try {
-      const { email, nickname, fullName, birthDate, password } = req.body;
+      const { email, username, password } = req.body;
 
       const user = new User({
         email,
-        fullName,
-        nickname,
-        birthDate,
+        // fullName,
+        // birthDate,
+        username,
         providerName: "local",
       });
       await user.setPassword(password);

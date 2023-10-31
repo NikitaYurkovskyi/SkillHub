@@ -1,5 +1,9 @@
-import { useNavigate } from "react-router-dom";
+import { Form, redirect, useNavigate } from "react-router-dom";
 import Input from "../../ui/Input";
+import ContinueWithProviderButton from "../../ui/ContinueWithProviderButton";
+import store from "../../store";
+import { setUserData } from "../user/userSlice";
+import { AUTH_SERVICE_URL } from "../../credentials";
 
 function SignupPage() {
   const navigate = useNavigate();
@@ -21,32 +25,21 @@ function SignupPage() {
               className="mb-6 w-8 shrink-0"
             />
           </div>
-          <div className="flex flex-col mr-16 gap-6">
+          <Form method="POST" className="flex flex-col mr-16 gap-6">
             <div className="text-sm font-['Montserrat'] font-bold leading-[20px] text-white self-start w-full">
               By continuing, you agree to our User Agreement and knowledge that
               you understand the Privacy Policy.
             </div>
             <div className="flex flex-col mb-px gap-3">
-              <button className="h-[50px] overflow-hidden bg-white flex flex-row gap-16 items-center px-5 rounded-[21px]">
-                <img
-                  src="https://c.animaapp.com/hFiUumBg/img/image-15@2x.png"
-                  id="Image1"
-                  className="w-10 shrink-0 my-1"
-                />
-                <div className="font-['Montserrat'] font-semibold text-[#414141]">
-                  Continue with Google
-                </div>
-              </button>
-              <button className="h-[50px] overflow-hidden bg-white flex flex-row gap-16 items-center px-5 rounded-[21px]">
-                <img
-                  src="https://c.animaapp.com/hFiUumBg/img/image-16@2x.png"
-                  id="Image1"
-                  className="w-10 shrink-0 my-1"
-                />
-                <div className="font-['Montserrat'] font-semibold text-[#414141]">
-                  Continue with GitHub
-                </div>
-              </button>
+              <ContinueWithProviderButton
+                src="https://c.animaapp.com/hFiUumBg/img/image-15@2x.png"
+                text="Continue with Google"
+              />
+
+              <ContinueWithProviderButton
+                src="https://c.animaapp.com/hFiUumBg/img/image-16@2x.png"
+                text="Continue with Github"
+              />
             </div>
             <div className="flex items-center">
               <div className="flex-1 mx-2 border-t" />
@@ -58,17 +51,27 @@ function SignupPage() {
 
             <div className="flex flex-col mb-px gap-3">
               <div className="flex flex-col gap-2">
-                <Input placeholder="Email" type="email" />
-                <Input placeholder="Username" />
-                <Input placeholder="Password" type="password" />
+                <Input
+                  required
+                  name={"email"}
+                  placeholder="Email"
+                  type="email"
+                />
+                <Input required name={"username"} placeholder="Username" />
+                <Input
+                  required
+                  name={"password"}
+                  placeholder="Password"
+                  type="password"
+                />
               </div>
             </div>
             <button className="overflow-hidden bg-[#001732] flex flex-col justify-center h-12 shrink-0 items-center mx-16 rounded-[21px]">
-              <button className="font-['Montserrat'] font-semibold text-white">
+              <span className="font-['Montserrat'] font-semibold text-white">
                 Registration
-              </button>
+              </span>
             </button>
-          </div>
+          </Form>
         </div>
         <div className="relative flex flex-row gap-2 w-2/3 items-start">
           <div className="text-xl font-['Montserrat'] font-bold leading-[27px] text-white">
@@ -84,6 +87,31 @@ function SignupPage() {
       </div>
     </div>
   );
+}
+
+// eslint-disable-next-line react-refresh/only-export-components
+export async function action({ request }) {
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+
+  const response = await fetch(`${AUTH_SERVICE_URL}signup`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+
+    localStorage.setItem("accessToken", data.accessToken);
+    localStorage.setItem("refreshToken", data.refreshToken);
+
+    store.dispatch(setUserData(data.userData));
+    return redirect("/");
+  }
+  return redirect("/signup");
 }
 
 export default SignupPage;

@@ -11,6 +11,7 @@ const swaggerUi = require("swagger-ui-express");
 const errorMiddleware = require("./middlewares/error.middleware");
 const router = require("./routes");
 const options = require("./swagger.options");
+const cors = require("cors"); // Add this line
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use(
   swaggerUi.setup(specs, { explorer: true })
 );
 
+app.use(cors()); // Add this line
 app.use(express.json());
 app.use(cookieParser());
 app.use(passport.initialize());

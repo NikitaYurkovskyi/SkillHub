@@ -20,7 +20,7 @@ const userSchema = new Schema(
       },
     },
     //то же самое, шо и логин
-    nickname: {
+    username: {
       type: String,
       required: function () {
         return this.providerName !== "google";
@@ -29,10 +29,6 @@ const userSchema = new Schema(
       minlength: 3,
     },
     //
-    fullName: {
-      type: String,
-      required: true,
-    },
     email: {
       type: String,
       required: true,
@@ -42,15 +38,19 @@ const userSchema = new Schema(
         message: "Invalid email format",
       },
     },
-    birthDate: {
-      type: Date,
-      validate: {
-        validator: function (value) {
-          return validator.isBefore(value.toString(), new Date().toString());
-        },
-        message: "Birth date must be in the past",
-      },
-    },
+    // fullName: {
+    //   type: String,
+    //   required: true,
+    // },
+    // birthDate: {
+    //   type: Date,
+    //   validate: {
+    //     validator: function (value) {
+    //       return validator.isBefore(value.toString(), new Date().toString());
+    //     },
+    //     message: "Birth date must be in the past",
+    //   },
+    // },
     //дата регистрации
     regDate: {
       type: Date,
