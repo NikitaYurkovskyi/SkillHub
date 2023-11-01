@@ -1,6 +1,6 @@
 node_modules
 dist
-
+rabbitmq-test
 target/
 .project
 .idea/
@@ -11,4 +11,3 @@ target/
 mvnw
 mvnw.cmd
 files/
-rabbitmq-test
