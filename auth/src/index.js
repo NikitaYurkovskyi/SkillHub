@@ -21,8 +21,12 @@ app.use(
   swaggerUi.serve,
   swaggerUi.setup(specs, { explorer: true })
 );
+const corsOptions = {
+  origin: "http://www.emilevi4.store",
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
 
-app.use(cors()); // Add this line
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 app.use(passport.initialize());
@@ -41,7 +45,7 @@ const start = async () => {
     useUnifiedTopology: true,
   });
   app.listen(PORT, () => {
-    console.log(`Auth service is running at ${PORT} (v1)`);
+    console.log(`Auth service is running at ${PORT} (with CORS)`);
   });
 };
 

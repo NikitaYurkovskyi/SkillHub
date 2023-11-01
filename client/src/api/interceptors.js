@@ -1,4 +1,5 @@
 import axios from "axios";
+import { AUTH_SERVICE_URL } from "../credentials";
 
 const getAxiosInstance = (baseUrl) => {
   const getAccessToken = () => localStorage.getItem("accessToken");
@@ -27,9 +28,12 @@ const getAxiosInstance = (baseUrl) => {
 
         try {
           const refreshResponse = await axios.post(
-            "http://localhost:3000/api/auth/refresh",
+            `${AUTH_SERVICE_URL}refresh`,
             {
               refreshToken: localStorage.getItem("refreshToken"),
+            },
+            {
+              withCredentials: true, // Включаем передачу cookies
             }
           );
 
