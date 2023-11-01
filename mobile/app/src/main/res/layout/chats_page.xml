@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#101010"
     android:backgroundTint="#101010"
-    tools:context=".ChatsPageActivity">
+    tools:context=".fragments.ChatsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"

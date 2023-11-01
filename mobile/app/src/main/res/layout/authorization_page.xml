@@ -7,7 +7,7 @@
     android:background="#003B93"
     app:circularflow_defaultRadius="8dp"
     app:circularflow_radiusInDP="8dp"
-    tools:context=".MainActivity">
+    tools:context=".fragments.AuthorizationFragment">
 
     <TextView
         android:id="@+id/textView"
@@ -112,7 +112,7 @@
         app:layout_constraintVertical_bias="0.6" />
 
     <EditText
-        android:id="@+id/editTextText"
+        android:id="@+id/loginField"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="79dp"
@@ -121,7 +121,7 @@
         android:backgroundTint="#001732"
         android:ems="10"
         android:fontFamily="@font/montserrat_bold"
-        android:hint="Username"
+        android:hint="Email"
         android:inputType="text"
         android:paddingLeft="17sp"
         android:paddingTop="17sp"
@@ -140,16 +140,16 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
-        android:layout_marginTop="31dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="35dp"
         android:backgroundTint="#001732"
         android:fontFamily="@font/montserrat_bold"
         android:text="Login"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPassword"
+        app:layout_constraintEnd_toEndOf="@+id/passwordField"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPassword"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+        app:layout_constraintStart_toStartOf="@+id/passwordField"
+        app:layout_constraintTop_toBottomOf="@+id/passwordField" />
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/materialToolbar2"
@@ -166,7 +166,7 @@
         app:layout_constraintTop_toBottomOf="@+id/button" />
 
     <EditText
-        android:id="@+id/editTextTextPassword"
+        android:id="@+id/passwordField"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="17dp"
@@ -181,10 +181,10 @@
         android:textColor="#FFFFFF"
         android:textColorHint="#99FFFFFF"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/editTextText"
+        app:layout_constraintEnd_toEndOf="@+id/loginField"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextText"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText" />
+        app:layout_constraintStart_toStartOf="@+id/loginField"
+        app:layout_constraintTop_toBottomOf="@+id/loginField" />
 
     <TextView
         android:id="@+id/textView2"
@@ -231,5 +231,19 @@
         app:layout_constraintHorizontal_bias="0.527"
         app:layout_constraintStart_toEndOf="@+id/textView4"
         app:layout_constraintTop_toTopOf="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/tvError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="TextView"
+        android:textColor="#FF0F61"
+        android:textSize="14sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/passwordField"
+        app:layout_constraintStart_toStartOf="@+id/passwordField"
+        app:layout_constraintTop_toBottomOf="@+id/passwordField" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

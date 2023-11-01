@@ -1,9 +1,15 @@
 package com.example.myapplication.retrofit
 
+import java.util.Date
+
 data class User(
-    val id: Int,
-    val email: String,
-    val displayName: String,
     val providerName: String,
-    val providerId: String
+    val username: String,
+    val email: String,
+    val isAdmin: Boolean,
+    val isBanned: Boolean,
+    val gender: String,
+    val regDate: Date,
+    val version: Int,
+    val id: String
 )

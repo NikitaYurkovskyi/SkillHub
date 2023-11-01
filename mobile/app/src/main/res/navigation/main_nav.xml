@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/authorizationPage">
+
+    <fragment
+        android:id="@+id/authorizationPage"
+        android:name="com.example.myapplication.fragments.AuthorizationFragment"
+        android:label="authorization_page"
+        tools:layout="@layout/authorization_page" >
+        <action
+            android:id="@+id/action_authorizationPage_to_registrationPage"
+            app:destination="@id/registrationPage" />
+        <action
+            android:id="@+id/action_authorizationPage_to_chatsPage"
+            app:destination="@id/chatsPage" />
+    </fragment>
+    <fragment
+        android:id="@+id/registrationPage"
+        android:name="com.example.myapplication.fragments.RegistrationFragment"
+        android:label="registration_page"
+        tools:layout="@layout/registration_page" >
+        <action
+            android:id="@+id/action_registrationPage_to_authorizationPage"
+            app:destination="@id/authorizationPage" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatsPage"
+        android:name="com.example.myapplication.fragments.ChatsFragment"
+        android:label="chats_page"
+        tools:layout="@layout/chats_page" >
+        <action
+            android:id="@+id/action_chatsPage_to_ownProfilePage"
+            app:destination="@id/ownProfilePage" />
+    </fragment>
+    <fragment
+        android:id="@+id/ownProfilePage"
+        android:name="com.example.myapplication.fragments.OwnProfileFragment"
+        android:label="own_profile_page"
+        tools:layout="@layout/own_profile_page" >
+        <action
+            android:id="@+id/action_ownProfilePage_to_chatsPage"
+            app:destination="@id/chatsPage" />
+        <action
+            android:id="@+id/action_ownProfilePage_to_authorizationPage"
+            app:destination="@id/authorizationPage" />
+    </fragment>
+</navigation>

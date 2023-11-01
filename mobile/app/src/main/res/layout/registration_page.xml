@@ -7,7 +7,7 @@
     android:background="#003B93"
     app:circularflow_defaultRadius="8dp"
     app:circularflow_radiusInDP="8dp"
-    tools:context=".MainActivity">
+    tools:context=".fragments.RegistrationFragment">
 
     <TextView
         android:id="@+id/textView"
@@ -111,10 +111,10 @@
         app:layout_constraintVertical_bias="0.6" />
 
     <EditText
-        android:id="@+id/editTextText"
+        android:id="@+id/emailField"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="62dp"
+        android:layout_marginTop="60dp"
         android:height="65px"
         android:background="@drawable/auth_reg_text_edit_bg"
         android:backgroundTint="#001732"
@@ -135,20 +135,20 @@
         app:layout_constraintTop_toBottomOf="@+id/button" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/registerButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="35dp"
         android:backgroundTint="#001732"
         android:fontFamily="@font/montserrat_bold"
         android:text="Registration"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPassword"
+        app:layout_constraintEnd_toEndOf="@+id/passwordField"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPassword"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+        app:layout_constraintStart_toStartOf="@+id/passwordField"
+        app:layout_constraintTop_toBottomOf="@+id/passwordField" />
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/materialToolbar2"
@@ -165,7 +165,7 @@
         app:layout_constraintTop_toBottomOf="@+id/button" />
 
     <EditText
-        android:id="@+id/editTextTextUsername"
+        android:id="@+id/usernameField"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
@@ -181,13 +181,13 @@
         android:textColor="#FFFFFF"
         android:textColorHint="#99FFFFFF"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/editTextText"
+        app:layout_constraintEnd_toEndOf="@+id/emailField"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextText"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText" />
+        app:layout_constraintStart_toStartOf="@+id/emailField"
+        app:layout_constraintTop_toBottomOf="@+id/emailField" />
 
     <EditText
-        android:id="@+id/editTextTextPassword"
+        android:id="@+id/passwordField"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
@@ -203,10 +203,10 @@
         android:textColor="#FFFFFF"
         android:textColorHint="#99FFFFFF"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/editTextText"
+        app:layout_constraintEnd_toEndOf="@+id/emailField"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextText"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextUsername"/>
+        app:layout_constraintStart_toStartOf="@+id/emailField"
+        app:layout_constraintTop_toBottomOf="@+id/usernameField" />
 
 
     <TextView
@@ -237,10 +237,10 @@
         android:textColor="#FFFFFF"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/button2"
+        app:layout_constraintEnd_toEndOf="@+id/registerButton"
         app:layout_constraintHorizontal_bias="0.432"
-        app:layout_constraintStart_toStartOf="@+id/button2"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintStart_toStartOf="@+id/registerButton"
+        app:layout_constraintTop_toBottomOf="@+id/registerButton" />
 
     <TextView
         android:id="@+id/linkToAuthorization"
@@ -250,9 +250,22 @@
         android:text="Log in"
         android:textColor="#D9D9D9"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/button2"
+        app:layout_constraintEnd_toEndOf="@+id/registerButton"
         app:layout_constraintHorizontal_bias="0.527"
         app:layout_constraintStart_toEndOf="@+id/textView4"
         app:layout_constraintTop_toTopOf="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/tvRegistrationError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="TextView"
+        android:textColor="#FF0F61"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/passwordField"
+        app:layout_constraintStart_toStartOf="@+id/passwordField"
+        app:layout_constraintTop_toBottomOf="@+id/passwordField" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
