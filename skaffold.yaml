@@ -16,11 +16,3 @@ build:
         manual:
           - src: "src/**/*.js"
             dest: .
-    - image: emilevi4/avpz.posts
-      context: posts
-      docker:
-        dockerfile: Dockerfile
-      sync:
-        manual:
-          - src: "src/**/*.ts"
-            dest: .

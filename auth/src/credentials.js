@@ -11,7 +11,8 @@ const JWT_ACCESS_SECRET =
   process.env.JWT_ACCESS_SECRET || "some_jwt_access_secret";
 const JWT_REFRESH_SECRET =
   process.env.JWT_REFRESH_SECRET || "some_jwt_refresh_secret";
-const MONGO_URL =
+const MONGO_URI =
+  process.env.MONGO_URI ||
   "mongodb+srv://emilevi4:QKNlcjPJe7LyHxq6@my-cluster.x0cjd1e.mongodb.net/?retryWrites=true&w=majority";
 
 module.exports = {
@@ -23,5 +24,5 @@ module.exports = {
   GITHUB_CALLBACK_URL,
   JWT_ACCESS_SECRET,
   JWT_REFRESH_SECRET,
-  MONGO_URL,
+  MONGO_URI,
 };

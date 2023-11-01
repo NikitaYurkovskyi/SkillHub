@@ -1,7 +1,7 @@
 const express = require("express");
 const passport = require("passport");
 const mongoose = require("mongoose");
-const { MONGO_URL } = require("./credentials");
+const { MONGO_URI } = require("./credentials");
 const googleStrategy = require("./strategies/google.strategy");
 const localStrategy = require("./strategies/local.strategy");
 var cookieParser = require("cookie-parser");
@@ -36,7 +36,7 @@ app.use(errorMiddleware);
 const PORT = 3000;
 
 const start = async () => {
-  await mongoose.connect(MONGO_URL, {
+  await mongoose.connect(MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
