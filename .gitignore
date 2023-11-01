@@ -1,3 +1,14 @@
 node_modules
 dist
+
+target/
+.project
+.idea/
+*.iws
+*.iml
+*.ipr
+.mvn
+mvnw
+mvnw.cmd
+files/
 rabbitmq-test
