@@ -11,6 +11,7 @@ import university.project.entity.PostEntity;
 import university.project.service.PostService;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -21,8 +22,15 @@ public class PostController {
     private final PostService postService;
 
     @GetMapping
-    public ResponseEntity<List<PostEntity>> getAllPosts() {
-        return ResponseEntity.ok(postService.findAllPosts());
+    public ResponseEntity<List<PostEntity>> getAllPosts(@RequestParam(required = false) LocalDateTime from,
+                                                        @RequestParam(required = false) LocalDateTime to) {
+        return ResponseEntity.ok(postService.findAllPosts(from, to));
+    }
+
+    @GetMapping("/sorted")
+    public ResponseEntity<List<PostEntity>> getAllPostsSorted(@RequestParam String fieldName,
+                                                              @RequestParam boolean isAscending) {
+        return ResponseEntity.ok(postService.findAllPostsSortedBy(fieldName, isAscending));
     }
 
     @GetMapping("/{id}")

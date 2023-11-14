@@ -3,6 +3,7 @@ package university.project.service;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import university.project.dto.PostDto;
@@ -25,8 +26,19 @@ public class PostService {
     @Value("${upload.path}")
     private String uploadPath;
 
-    public List<PostEntity> findAllPosts() {
+    public List<PostEntity> findAllPosts(LocalDateTime from, LocalDateTime to) {
+        if (from != null && to != null) {
+            return postRepository.findAllByCreatedDateTimeBetween(from, to);
+        }
         return postRepository.findAll();
+    }
+
+    public List<PostEntity> findAllPostsSortedBy(String fieldName, boolean isAscending) {
+        return postRepository.findAll(Sort.by(getSortDirection(isAscending), fieldName));
+    }
+
+    private static Sort.Direction getSortDirection(boolean isAscending) {
+        return isAscending ? Sort.Direction.ASC : Sort.Direction.DESC;
     }
 
     public PostEntity findPostById(Long postId) {
