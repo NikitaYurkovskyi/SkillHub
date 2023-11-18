@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_registrationPage_to_authorizationPage"
             app:destination="@id/authorizationPage" />
+        <action
+            android:id="@+id/action_registrationPage_to_registrationSecondFragment"
+            app:destination="@id/registrationSecondFragment" />
     </fragment>
     <fragment
         android:id="@+id/chatsPage"
@@ -34,6 +37,9 @@
         <action
             android:id="@+id/action_chatsPage_to_ownProfilePage"
             app:destination="@id/ownProfilePage" />
+        <action
+            android:id="@+id/action_chatsPage_to_correspondenceFragment2"
+            app:destination="@id/correspondenceFragment2" />
     </fragment>
     <fragment
         android:id="@+id/ownProfilePage"
@@ -46,5 +52,37 @@
         <action
             android:id="@+id/action_ownProfilePage_to_authorizationPage"
             app:destination="@id/authorizationPage" />
+        <action
+            android:id="@+id/action_ownProfilePage_to_ownProfileEditing2"
+            app:destination="@id/ownProfileEditing2" />
+    </fragment>
+    <fragment
+        android:id="@+id/ownProfileEditing2"
+        android:name="com.example.myapplication.fragments.OwnProfileEditing"
+        android:label="fragment_own_profile_editing"
+        tools:layout="@layout/fragment_own_profile_editing" >
+        <action
+            android:id="@+id/action_ownProfileEditing2_to_ownProfilePage"
+            app:destination="@id/ownProfilePage" />
+    </fragment>
+    <fragment
+        android:id="@+id/correspondenceFragment2"
+        android:name="com.example.myapplication.fragments.CorrespondenceFragment"
+        android:label="CorrespondenceFragment" >
+        <action
+            android:id="@+id/action_correspondenceFragment2_to_ownProfilePage"
+            app:destination="@id/ownProfilePage" />
+    </fragment>
+    <fragment
+        android:id="@+id/registrationSecondFragment"
+        android:name="com.example.myapplication.fragments.RegistrationSecondFragment"
+        android:label="fragment_registration_second"
+        tools:layout="@layout/fragment_registration_second" >
+        <action
+            android:id="@+id/action_registrationSecondFragment_to_authorizationPage"
+            app:destination="@id/authorizationPage" />
+        <action
+            android:id="@+id/action_registrationSecondFragment_to_registrationPage"
+            app:destination="@id/registrationPage" />
     </fragment>
 </navigation>

@@ -1,9 +1,12 @@
 package com.example.myapplication.retrofit
 
+import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.Part
 
 interface MainApi {
     @GET("auth/user")
@@ -21,10 +24,10 @@ interface MainApi {
     @GET("auth/google/callback")
     suspend fun callbackAfterGoogleAuthorization(code : String) : AuthResponse
 
-    @POST("auth/signup")
-    suspend fun userRegistration(@Body registrationData: UserDto) : Response<AuthResponse>
+    @POST("auth/sign-up")
+    suspend fun userRegistration(@Body registrationData: SignUpDto) : Response<AuthResponse>
 
-    @POST("auth/signin")
+    @POST("auth/sign-in")
     suspend fun  userLogin(@Body loginData : UserAuthForm) : Response<AuthResponse>
 
     @GET("auth/refresh")

@@ -83,7 +83,7 @@ class AuthorizationFragment : Fragment() {
                 if (response.code() == 401){
                     binding.tvError.visibility = View.VISIBLE
                     binding.tvError.text = "Invalid email or password"
-                } else if (response.code() == 400) {
+                } else if (response.code() == 404) {
                     binding.tvError.visibility = View.VISIBLE
                     binding.tvError.text = "Invalid email or password"
                 }

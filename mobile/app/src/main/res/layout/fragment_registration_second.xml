@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.RegistrationSecondFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#003B93"
+        app:circularflow_defaultRadius="8dp"
+        app:circularflow_radiusInDP="8dp"
+        tools:context=".fragments.RegistrationFragment">
+
+        <Button
+            android:id="@+id/registerBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="35dp"
+            android:backgroundTint="#001732"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="Registration"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/birthDayField"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/birthDayField"
+            app:layout_constraintTop_toBottomOf="@+id/birthDayField" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="39sp"
+            android:layout_marginTop="52dp"
+            android:layout_marginEnd="39sp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="Registration"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="#FFFFFF"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.07"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/materialToolbar"
+            android:layout_width="110sp"
+            android:layout_height="1dp"
+            android:layout_marginTop="30dp"
+            android:background="?attr/colorPrimary"
+            android:backgroundTint="#FFFFFF"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/button"
+            app:layout_constraintTop_toBottomOf="@+id/button" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="300sp"
+            android:height="50sp"
+            android:backgroundTint="@color/white"
+            android:text="Continue with GitHub"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/button3"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/button3"
+            app:layout_constraintTop_toBottomOf="@+id/button3"
+            app:layout_constraintVertical_bias="0.035" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="40sp"
+            android:layout_height="40sp"
+            android:src="@drawable/github_logo"
+            app:layout_constraintBottom_toBottomOf="@+id/button"
+            app:layout_constraintEnd_toEndOf="@+id/button"
+            app:layout_constraintHorizontal_bias="0.069"
+            app:layout_constraintStart_toStartOf="@+id/button"
+            app:layout_constraintTop_toTopOf="@+id/button" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OR"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.476"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button"
+            app:layout_constraintVertical_bias="0.034" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="300sp"
+            android:height="50sp"
+            android:backgroundTint="@color/white"
+            android:text="Continue with Google"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.432"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            app:layout_constraintVertical_bias="0.029" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/google_logo"
+            app:layout_constraintBottom_toBottomOf="@+id/button3"
+            app:layout_constraintEnd_toEndOf="@+id/button3"
+            app:layout_constraintHorizontal_bias="0.069"
+            app:layout_constraintStart_toStartOf="@+id/button3"
+            app:layout_constraintTop_toTopOf="@+id/button3"
+            app:layout_constraintVertical_bias="0.6" />
+
+        <EditText
+            android:id="@+id/fullNameField"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:height="65px"
+            android:background="@drawable/auth_reg_text_edit_bg"
+            android:backgroundTint="#001732"
+            android:ems="10"
+            android:fontFamily="@font/montserrat_bold"
+            android:hint="Full name"
+            android:inputType="text"
+            android:paddingLeft="17sp"
+            android:paddingTop="17sp"
+            android:paddingBottom="17sp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#99FFFFFF"
+            android:textSize="20sp"
+            app:circularflow_radiusInDP="8sp"
+            app:layout_constraintEnd_toEndOf="@+id/button"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/button"
+            app:layout_constraintTop_toBottomOf="@+id/button" />
+
+        <Button
+            android:id="@+id/registrationBackButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="35dp"
+            android:backgroundTint="#001732"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="Back"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/birthDayField"
+            app:layout_constraintStart_toStartOf="@+id/birthDayField"
+            app:layout_constraintTop_toBottomOf="@+id/registerBtn" />
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/materialToolbar2"
+            android:layout_width="110sp"
+            android:layout_height="1dp"
+            android:layout_marginTop="30dp"
+            android:background="?attr/colorPrimary"
+            android:backgroundTint="#FFFFFF"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintEnd_toEndOf="@+id/button"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button" />
+
+        <EditText
+            android:id="@+id/birthDayField"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/auth_reg_text_edit_bg"
+            android:backgroundTint="#001732"
+            android:ems="10"
+            android:fontFamily="@font/montserrat_bold"
+            android:hint="Birthday"
+            android:inputType="date"
+            android:paddingLeft="17sp"
+            android:paddingTop="17sp"
+            android:paddingBottom="17sp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#99FFFFFF"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@+id/fullNameField"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/fullNameField"
+            app:layout_constraintTop_toBottomOf="@+id/fullNameField" />
+
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+
+            android:fontFamily="@font/montserrat_bold"
+            android:lineSpacingExtra="5sp"
+            android:text="By continuing, you agree to our User\nAgreement and knowledge that you\nunderstand the Privacy Policy."
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintVertical_bias="0.025" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="80dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="Already have an account?   "
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/registrationBackButton"
+            app:layout_constraintHorizontal_bias="0.432"
+            app:layout_constraintStart_toStartOf="@+id/registrationBackButton"
+            app:layout_constraintTop_toBottomOf="@+id/registrationBackButton" />
+
+        <TextView
+            android:id="@+id/linkToAuthorization"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="Log in"
+            android:textColor="#D9D9D9"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/registrationBackButton"
+            app:layout_constraintHorizontal_bias="0.527"
+            app:layout_constraintStart_toEndOf="@+id/textView4"
+            app:layout_constraintTop_toTopOf="@+id/textView4" />
+
+        <TextView
+            android:id="@+id/tvRegistrationError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="TextView"
+            android:textColor="#FF0F61"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="@+id/birthDayField"
+            app:layout_constraintStart_toStartOf="@+id/birthDayField"
+            app:layout_constraintTop_toBottomOf="@+id/birthDayField" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

@@ -5,13 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
 import com.example.myapplication.databinding.RegistrationPageBinding
 import com.example.myapplication.retrofit.MainApi
-import com.example.myapplication.retrofit.UserDto
+import com.example.myapplication.retrofit.SignUpDto
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -20,9 +22,20 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+class RegistrationViewModel: ViewModel(){
+    private val _registrationData = MutableLiveData<RegistrationData>()
+    val registrationData: LiveData<RegistrationData> get() = _registrationData
+
+    fun setRegistrationData(data: RegistrationData){
+        _registrationData.value = data
+    }
+}
+data class RegistrationData(val username: String, val email: String, val password: String)
+
+
 class RegistrationFragment : Fragment() {
     private lateinit var binding: RegistrationPageBinding
-    private lateinit var mainApi: MainApi
+    private lateinit var viewModel: RegistrationViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,60 +47,44 @@ class RegistrationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initRetrofit()
+        viewModel = ViewModelProvider(requireActivity())[RegistrationViewModel::class.java]
+        val registrationData = viewModel.registrationData.value
+
+        //initRetrofit()
         binding.apply {
             val goToAuthorization = linkToAuthorization
-            val register = registerButton
+            val registerNextBtn = registrationNextBtn
             val controller = findNavController()
+
+            if (registrationData != null){
+                usernameField.setText(registrationData.username)
+                emailField.setText(registrationData.email)
+                passwordField.setText(registrationData.password)
+            }
 
             goToAuthorization.setOnClickListener{
                 controller.navigate(R.id.authorizationPage)
             }
-            register.setOnClickListener{
-                register(
-                    UserDto(
-                        emailField.text.toString(),
-                        passwordField.text.toString(),
-                        usernameField.text.toString()
-                    )
-                )
+            registerNextBtn.setOnClickListener{
+                goNextRegistrationPage()
             }
         }
     }
 
-    private fun initRetrofit(){
-        var interceptor = HttpLoggingInterceptor()
-        interceptor.level = HttpLoggingInterceptor.Level.BODY
+    private fun goNextRegistrationPage(){
+        val username: String = binding.usernameField.text.toString()
+        val email: String = binding.emailField.text.toString()
+        val password: String = binding.passwordField.text.toString()
 
-        val client = OkHttpClient.Builder()
-            .addInterceptor(interceptor)
-            .build()
-
-        val retrofit = Retrofit.Builder()
-            .baseUrl("http://www.emilevi4.store/api/")
-            .client(client)
-            .addConverterFactory(GsonConverterFactory.create()).build()
-
-        mainApi = retrofit.create(MainApi::class.java)
-    }
-
-    private fun register(registrationData: UserDto){
-        CoroutineScope(Dispatchers.IO).launch {
-            val response = mainApi.userRegistration(registrationData)
-            requireActivity().runOnUiThread{
-                if (response.code() == 201){
-                    val controller = findNavController()
-                    controller.navigate(R.id.authorizationPage)
-                }
-                if (response.code() == 409){
-                    binding.tvRegistrationError.visibility = View.VISIBLE
-                    binding.tvRegistrationError.text = "User with such data already exist"
-                }
-                if (response.code() == 400){
-                    binding.tvRegistrationError.visibility = View.VISIBLE
-                    binding.tvRegistrationError.text = "Invalid registration data"
-                }
-            }
+        if (username.trim().isEmpty() || email.trim().isEmpty() || password.trim().isEmpty()){
+            binding.tvRegistrationError.visibility = View.VISIBLE
+            binding.tvRegistrationError.text = "Please fill in all fields"
+            return
         }
+        val registrationData = RegistrationData(username, email, password)
+        viewModel.setRegistrationData(registrationData)
+        findNavController().navigate(R.id.registrationSecondFragment)
     }
+
+
 }

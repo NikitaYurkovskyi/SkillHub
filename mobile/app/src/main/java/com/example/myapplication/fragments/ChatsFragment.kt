@@ -22,10 +22,15 @@ class ChatsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         var ownProfileButton = view.findViewById<ImageView>(R.id.viewOwnProfile)
+        var goToForumButton = view.findViewById<ImageView>(R.id.goToForumBtn)
         var controller = findNavController()
 
         ownProfileButton.setOnClickListener{
             controller.navigate(R.id.ownProfilePage)
+        }
+
+        goToForumButton.setOnClickListener{
+            controller.navigate(R.id.correspondenceFragment2)
         }
     }
 }
