@@ -5,20 +5,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.findFragment
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.LoginViewModel
 import com.example.myapplication.R
+import com.example.myapplication.classes.TokenManager
+import com.example.myapplication.classes.UserModel
 import com.example.myapplication.databinding.AuthorizationPageBinding
 import com.example.myapplication.retrofit.MainApi
+import com.example.myapplication.retrofit.RetrofitInit
 import com.example.myapplication.retrofit.UserAuthForm
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import okhttp3.Dispatcher
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -27,6 +26,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 class AuthorizationFragment : Fragment() {
     private lateinit var binding: AuthorizationPageBinding
     private lateinit var mainApi: MainApi
+    private lateinit var retrofitInit: RetrofitInit
+    private lateinit var tokenManager: TokenManager
+    private var baseURL = "http://www.emilevi4.store/api/"
     private val viewModel: LoginViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,9 +42,21 @@ class AuthorizationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
             initRetrofit()
+            retrofitInit = RetrofitInit()
             val goToRegistration = goToRegistration
             val authorize = authorizedButton
             val controller = findNavController()
+            tokenManager = TokenManager(requireContext())
+
+
+            CoroutineScope(Dispatchers.Main).launch {
+                val isUserAuthenticated = checkUserAuthentication()
+                if (isUserAuthenticated) {
+                    requireActivity().runOnUiThread{
+                        controller.navigate(R.id.chatsPage)
+                    }
+                }
+            }
 
             goToRegistration.setOnClickListener{
                 controller.navigate(R.id.registrationPage)
@@ -89,11 +103,17 @@ class AuthorizationFragment : Fragment() {
                 }
                 val authResponse = response.body()
                 if (authResponse != null){
-                    viewModel.token.value = authResponse.accessToken
+                    tokenManager.saveTokens(authResponse.accessToken, authResponse.refreshToken)
                     val controller = findNavController()
                     controller.navigate(R.id.chatsPage)
                 }
             }
         }
     }
+
+    private suspend fun checkUserAuthentication(): Boolean {
+        val userModel = UserModel()
+        return userModel.isUserAuth(tokenManager, mainApi, retrofitInit, baseURL)
+    }
+
 }

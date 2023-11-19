@@ -17,4 +17,13 @@ class TokenManager(val context: Context) {
         val refreshToken = sharedPreferences.getString("REFRESH_TOKEN", null)
         return Pair(accessToken, refreshToken)
     }
+
+    fun clearTokens() {
+        val sharedPreferences = context.getSharedPreferences("TOKENS", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.remove("ACCESS_TOKEN")
+        editor.remove("REFRESH_TOKEN")
+        editor.commit()
+    }
+
 }

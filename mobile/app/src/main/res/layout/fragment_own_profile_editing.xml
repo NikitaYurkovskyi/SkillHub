@@ -2,18 +2,19 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nameField"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#1D1D1D"
     android:backgroundTint="#1D1D1D"
-    tools:context=".fragments.OwnProfileEditing" >
+    tools:context=".fragments.OwnProfileEditing">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <EditText
-            android:id="@+id/editTextText4"
+            android:id="@+id/birthDateField"
             android:layout_width="330dp"
             android:layout_height="50dp"
             android:layout_marginTop="9dp"
@@ -40,11 +41,11 @@
             android:text="Birth day"
             android:textColor="#FFFFFF"
             android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@+id/editTextText3"
-            app:layout_constraintTop_toBottomOf="@+id/editTextText3" />
+            app:layout_constraintStart_toStartOf="@+id/userProfileEmailField"
+            app:layout_constraintTop_toBottomOf="@+id/userProfileEmailField" />
 
         <EditText
-            android:id="@+id/editTextText3"
+            android:id="@+id/userProfileEmailField"
             android:layout_width="330dp"
             android:layout_height="50dp"
             android:layout_marginTop="8dp"
@@ -63,14 +64,14 @@
             app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
         <ImageView
-            android:id="@+id/changeEmailBtn"
+            android:id="@+id/changeBirthDateBtn"
             android:layout_width="42dp"
             android:layout_height="42dp"
             android:layout_marginEnd="4dp"
             android:src="@drawable/edit_profile_btn"
-            app:layout_constraintBottom_toBottomOf="@+id/editTextText4"
-            app:layout_constraintEnd_toEndOf="@+id/editTextText4"
-            app:layout_constraintTop_toTopOf="@+id/editTextText4"
+            app:layout_constraintBottom_toBottomOf="@+id/birthDateField"
+            app:layout_constraintEnd_toEndOf="@+id/birthDateField"
+            app:layout_constraintTop_toTopOf="@+id/birthDateField"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
@@ -82,11 +83,11 @@
             android:text="E-mail"
             android:textColor="#FFFFFF"
             android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@+id/editTextText2"
-            app:layout_constraintTop_toBottomOf="@+id/editTextText2" />
+            app:layout_constraintStart_toStartOf="@+id/userProfileNameField"
+            app:layout_constraintTop_toBottomOf="@+id/userProfileNameField" />
 
         <EditText
-            android:id="@+id/editTextText2"
+            android:id="@+id/userProfileNameField"
             android:layout_width="330dp"
             android:layout_height="50dp"
             android:layout_marginTop="8dp"
@@ -113,29 +114,29 @@
             android:text="Name"
             android:textColor="#FFFFFF"
             android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@+id/editTextText"
-            app:layout_constraintTop_toBottomOf="@+id/editTextText" />
+            app:layout_constraintStart_toStartOf="@+id/nicknameField"
+            app:layout_constraintTop_toBottomOf="@+id/nicknameField" />
 
         <ImageView
-            android:id="@+id/changePhoneBtn"
+            android:id="@+id/changeNameBtn"
             android:layout_width="42dp"
             android:layout_height="42dp"
             android:layout_marginEnd="7dp"
             android:src="@drawable/edit_profile_btn"
-            app:layout_constraintBottom_toBottomOf="@+id/editTextText2"
-            app:layout_constraintEnd_toEndOf="@+id/editTextText2"
-            app:layout_constraintTop_toTopOf="@+id/editTextText2" />
+            app:layout_constraintBottom_toBottomOf="@+id/userProfileNameField"
+            app:layout_constraintEnd_toEndOf="@+id/userProfileNameField"
+            app:layout_constraintTop_toTopOf="@+id/userProfileNameField" />
 
         <ImageView
-            android:id="@+id/changeEmailBtn2"
+            android:id="@+id/changeEmailBtn"
             android:layout_width="42dp"
             android:layout_height="42dp"
             android:layout_marginEnd="4dp"
             android:layout_marginBottom="8dp"
             android:src="@drawable/edit_profile_btn"
-            app:layout_constraintBottom_toBottomOf="@+id/editTextText3"
-            app:layout_constraintEnd_toEndOf="@+id/editTextText3"
-            app:layout_constraintTop_toTopOf="@+id/editTextText3"
+            app:layout_constraintBottom_toBottomOf="@+id/userProfileEmailField"
+            app:layout_constraintEnd_toEndOf="@+id/userProfileEmailField"
+            app:layout_constraintTop_toTopOf="@+id/userProfileEmailField"
             app:layout_constraintVertical_bias="0.0" />
 
         <ImageView
@@ -143,7 +144,7 @@
             android:layout_width="160dp"
             android:layout_height="160dp"
             android:layout_marginStart="123dp"
-            android:layout_marginTop="44dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="123dp"
             android:src="@drawable/edit_profile_page_user_iage"
             app:layout_constraintEnd_toEndOf="parent"
@@ -166,7 +167,7 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView7" />
 
         <EditText
-            android:id="@+id/editTextText"
+            android:id="@+id/nicknameField"
             android:layout_width="330dp"
             android:layout_height="50dp"
             android:layout_marginTop="9dp"
@@ -187,21 +188,21 @@
             app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
         <ImageView
-            android:id="@+id/changeNameBtn"
+            android:id="@+id/changeNicknameBtn"
             android:layout_width="42dp"
             android:layout_height="42dp"
             android:layout_marginEnd="7dp"
             android:src="@drawable/edit_profile_btn"
-            app:layout_constraintBottom_toBottomOf="@+id/editTextText"
-            app:layout_constraintEnd_toEndOf="@+id/editTextText"
-            app:layout_constraintTop_toTopOf="@+id/editTextText" />
+            app:layout_constraintBottom_toBottomOf="@+id/nicknameField"
+            app:layout_constraintEnd_toEndOf="@+id/nicknameField"
+            app:layout_constraintTop_toTopOf="@+id/nicknameField" />
 
         <Button
             android:id="@+id/applyChangesBtn"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="77dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="35dp"
             android:layout_marginEnd="64dp"
             android:height="50dp"
             android:backgroundTint="#D9D9D9"
@@ -212,7 +213,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.95"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextText4" />
+            app:layout_constraintTop_toBottomOf="@+id/birthDateField" />
 
         <Button
             android:id="@+id/backBtn"
@@ -228,6 +229,19 @@
             app:layout_constraintEnd_toEndOf="@+id/applyChangesBtn"
             app:layout_constraintStart_toStartOf="@+id/applyChangesBtn"
             app:layout_constraintTop_toBottomOf="@+id/applyChangesBtn" />
+
+        <TextView
+            android:id="@+id/tvProfileEditingError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="TextView"
+            android:textColor="#FF0F61"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="@+id/birthDateField"
+            app:layout_constraintStart_toStartOf="@+id/birthDateField"
+            app:layout_constraintTop_toBottomOf="@+id/birthDateField" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
