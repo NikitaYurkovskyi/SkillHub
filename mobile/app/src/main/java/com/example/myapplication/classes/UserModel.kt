@@ -1,7 +1,6 @@
 package com.example.myapplication.classes
 
 import android.util.Log
-import com.example.myapplication.adapter.UserAdapter
 import com.example.myapplication.retrofit.MainApi
 import com.example.myapplication.retrofit.OtherUserProfile
 import com.example.myapplication.retrofit.RetrofitInit

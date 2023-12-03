@@ -34,7 +34,12 @@ interface MainApi {
         @Body userInfo: SignUpDto
     ): Response<User>
 
-
     @GET("user/random/")
     suspend fun getRandomUserProfile(): List<OtherUserProfile>
+
+    @Headers("Content-Type: application/json")
+    @GET("chat")
+    suspend fun getChats(
+        @Header("Authorization") accessToken: String,
+    ): List<ChatModel>
 }

@@ -10,20 +10,25 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.BuildConfig
 import com.example.myapplication.R
-import com.example.myapplication.adapter.UserAdapter
+import com.example.myapplication.adapter.ChatAdapter
+import com.example.myapplication.classes.Chat
+import com.example.myapplication.classes.TokenManager
 import com.example.myapplication.classes.UserModel
 import com.example.myapplication.databinding.ChatsPageBinding
+import com.example.myapplication.retrofit.ChatModel
 import com.example.myapplication.retrofit.OtherUserProfile
 import com.example.myapplication.retrofit.RetrofitInit
+import com.example.myapplication.retrofit.User
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ChatsFragment : Fragment() {
     private lateinit var binding: ChatsPageBinding
-    private lateinit var adapter: UserAdapter
+    private lateinit var adapter: ChatAdapter
     private lateinit var retrofitInit: RetrofitInit
     private var baseURL = BuildConfig.BASE_URL
+    private lateinit var tokenManager: TokenManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,14 +42,27 @@ class ChatsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initRcView()
         retrofitInit = RetrofitInit()
-        CoroutineScope(Dispatchers.IO).launch {
-            val randomUsersProfile = getRandomUsers()
-            requireActivity().runOnUiThread {
-                Log.i("ChatsFragment", randomUsersProfile.toString())
-                adapter.submitList(randomUsersProfile)
+        tokenManager = TokenManager(requireContext())
 
+        initRcView()
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val userModel: UserModel = UserModel()
+            val user = userModel.getUserInfo(tokenManager, retrofitInit, baseURL)
+            requireActivity().runOnUiThread {
+                if (user != null) {
+                    // Передаем nickname после получения информации о пользователе
+                    adapter.setNickname(user.nickname)
+                }
+            }
+        }
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val userChats = getUserChats()
+            requireActivity().runOnUiThread {
+                Log.i("ChatsFragment", userChats.toString())
+                adapter.submitList(userChats)
             }
         }
 
@@ -63,17 +81,17 @@ class ChatsFragment : Fragment() {
         }
     }
 
-    private suspend fun getRandomUsers(): List<OtherUserProfile>? {
-        val user = UserModel()
-        return user.getAllUser(retrofitInit, baseURL)
+    private suspend fun getUserChats(): List<ChatModel>? {
+        val chat = Chat()
+        return chat.getAllUserChat(retrofitInit, baseURL, tokenManager)
     }
 
-    private fun updateAdapterList(newList: List<OtherUserProfile>) {
+    private fun updateAdapterList(newList: List<ChatModel>) {
         adapter.submitList(newList)
     }
 
     private fun initRcView() = with(binding){
-        adapter = UserAdapter()
+        adapter = ChatAdapter()
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = adapter
     }
