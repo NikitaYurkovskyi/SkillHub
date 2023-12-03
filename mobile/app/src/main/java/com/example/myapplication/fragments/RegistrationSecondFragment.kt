@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.myapplication.BuildConfig
 import com.example.myapplication.R
 import com.example.myapplication.classes.TokenManager
 import com.example.myapplication.databinding.FragmentRegistrationSecondBinding
@@ -49,7 +50,7 @@ class RegistrationSecondFragment: Fragment(){
         viewModel = ViewModelProvider(requireActivity())[RegistrationViewModel::class.java]
         val registrationData = viewModel.registrationData.value
         retrofitInit = RetrofitInit()
-        retrofitInit.initRetrofit("http://www.emilevi4.store/api/")
+        retrofitInit.initRetrofit(BuildConfig.BASE_URL)
         tokenManager = TokenManager(requireContext())
         binding.apply {
             val backButton = registrationBackButton

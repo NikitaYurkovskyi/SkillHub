@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.myapplication.BuildConfig
 import com.example.myapplication.R
 import com.example.myapplication.adapter.UserAdapter
 import com.example.myapplication.classes.UserModel
@@ -22,7 +23,7 @@ class ChatsFragment : Fragment() {
     private lateinit var binding: ChatsPageBinding
     private lateinit var adapter: UserAdapter
     private lateinit var retrofitInit: RetrofitInit
-    private var baseURL = "http://www.emilevi4.store/api/"
+    private var baseURL = BuildConfig.BASE_URL
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

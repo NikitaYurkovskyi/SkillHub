@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.example.myapplication.BuildConfig
 import com.example.myapplication.R
 import com.example.myapplication.classes.TokenManager
 import com.example.myapplication.classes.UserModel
@@ -19,7 +20,7 @@ class OwnProfileFragment : Fragment() {
     private lateinit var binding: OwnProfilePageBinding
     private lateinit var tokenManager: TokenManager
     private lateinit var retrofitInit: RetrofitInit
-    private var baseURL = "http://www.emilevi4.store/api/"
+    private var baseURL = BuildConfig.BASE_URL
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -15,6 +15,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "BASE_URL", "\"http://10.0.2.2:3000/api/\"")
     }
 
     buildFeatures {
@@ -29,10 +30,10 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            buildConfigField("String", "BASE_URL", "\"http://www.emilevi4.store/api/\"")
+
         }
         debug {
-            buildConfigField("String", "BASE_URL", "\"http://www.emilevi4.store/api/\"")
+
         }
     }
     compileOptions {

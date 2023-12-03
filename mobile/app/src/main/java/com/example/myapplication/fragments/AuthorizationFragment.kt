@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.example.myapplication.BuildConfig
 import com.example.myapplication.LoginViewModel
 import com.example.myapplication.R
 import com.example.myapplication.classes.TokenManager
@@ -28,7 +29,8 @@ class AuthorizationFragment : Fragment() {
     private lateinit var mainApi: MainApi
     private lateinit var retrofitInit: RetrofitInit
     private lateinit var tokenManager: TokenManager
-    private var baseURL = "http://www.emilevi4.store/api/"
+    private val baseUrl = BuildConfig.BASE_URL
+
     private val viewModel: LoginViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -83,7 +85,7 @@ class AuthorizationFragment : Fragment() {
             .build()
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://www.emilevi4.store/api/")
+            .baseUrl(baseUrl)
             .client(client)
             .addConverterFactory(GsonConverterFactory.create()).build()
 
@@ -113,7 +115,7 @@ class AuthorizationFragment : Fragment() {
 
     private suspend fun checkUserAuthentication(): Boolean {
         val userModel = UserModel()
-        return userModel.isUserAuth(tokenManager, mainApi, retrofitInit, baseURL)
+        return userModel.isUserAuth(tokenManager, mainApi, retrofitInit, baseUrl)
     }
 
 }

@@ -12,6 +12,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.navigation.fragment.findNavController
+import com.example.myapplication.BuildConfig
 import com.example.myapplication.R
 import com.example.myapplication.classes.TokenManager
 import com.example.myapplication.classes.UserModel
@@ -30,7 +31,7 @@ class OwnProfileEditing : Fragment() {
     private lateinit var binding: FragmentOwnProfileEditingBinding
     private lateinit var tokenManager: TokenManager
     private lateinit var retrofitInit: RetrofitInit
-    private var baseURL = "http://www.emilevi4.store/api/"
+    private var baseURL = BuildConfig.BASE_URL
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
