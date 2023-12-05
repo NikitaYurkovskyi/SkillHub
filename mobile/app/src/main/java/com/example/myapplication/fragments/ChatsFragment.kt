@@ -16,16 +16,14 @@ import com.example.myapplication.classes.TokenManager
 import com.example.myapplication.classes.UserModel
 import com.example.myapplication.databinding.ChatsPageBinding
 import com.example.myapplication.retrofit.ChatModel
-import com.example.myapplication.retrofit.OtherUserProfile
 import com.example.myapplication.retrofit.RetrofitInit
-import com.example.myapplication.retrofit.User
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ChatsFragment : Fragment() {
     private lateinit var binding: ChatsPageBinding
-    private lateinit var adapter: ChatAdapter
+    private lateinit var chatAdapter: ChatAdapter
     private lateinit var retrofitInit: RetrofitInit
     private var baseURL = BuildConfig.BASE_URL
     private lateinit var tokenManager: TokenManager
@@ -52,8 +50,7 @@ class ChatsFragment : Fragment() {
             val user = userModel.getUserInfo(tokenManager, retrofitInit, baseURL)
             requireActivity().runOnUiThread {
                 if (user != null) {
-                    // Передаем nickname после получения информации о пользователе
-                    adapter.setNickname(user.nickname)
+                    chatAdapter.setNickname(user.nickname)
                 }
             }
         }
@@ -62,7 +59,7 @@ class ChatsFragment : Fragment() {
             val userChats = getUserChats()
             requireActivity().runOnUiThread {
                 Log.i("ChatsFragment", userChats.toString())
-                adapter.submitList(userChats)
+                chatAdapter.submitList(userChats)
             }
         }
 
@@ -78,6 +75,7 @@ class ChatsFragment : Fragment() {
             goToForumButton.setOnClickListener{
                 controller.navigate(R.id.correspondenceFragment2)
             }
+
         }
     }
 
@@ -87,12 +85,20 @@ class ChatsFragment : Fragment() {
     }
 
     private fun updateAdapterList(newList: List<ChatModel>) {
-        adapter.submitList(newList)
+        chatAdapter.submitList(newList)
     }
 
     private fun initRcView() = with(binding){
-        adapter = ChatAdapter()
+        chatAdapter = ChatAdapter()
         recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = adapter
+        recyclerView.adapter = chatAdapter
+
+        chatAdapter.setOnChatClickListener { chatId ->
+            val bundle = Bundle()
+            bundle.putString("chatId", chatId)
+
+            var controller = findNavController()
+            controller.navigate(R.id.chattingFragment, bundle)
+        }
     }
 }

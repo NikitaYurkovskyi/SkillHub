@@ -14,10 +14,15 @@ import com.example.myapplication.retrofit.ChatModel
 class ChatAdapter(): ListAdapter<ChatModel, ChatAdapter.Holder>(Comparator()) {
 
     private var nickname: String = ""
+    private lateinit var onChatClickListener: (String) -> Unit
 
     fun setNickname(nickname: String) {
         this.nickname = nickname
         notifyDataSetChanged()
+    }
+
+    fun setOnChatClickListener(onChatClickListener: (String) -> Unit) {
+        this.onChatClickListener = onChatClickListener
     }
 
     inner class Holder(view: View): RecyclerView.ViewHolder(view){
@@ -29,6 +34,8 @@ class ChatAdapter(): ListAdapter<ChatModel, ChatAdapter.Holder>(Comparator()) {
             } else {
                 userNick.text = chatModel.members[0].nickname
             }
+
+            itemView.setOnClickListener{onChatClickListener(chatModel.chat.id)}
         }
     }
 

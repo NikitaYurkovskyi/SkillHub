@@ -40,6 +40,9 @@
         <action
             android:id="@+id/action_chatsPage_to_correspondenceFragment2"
             app:destination="@id/correspondenceFragment2" />
+        <action
+            android:id="@+id/action_chatsPage_to_chattingFragment"
+            app:destination="@id/chattingFragment" />
     </fragment>
     <fragment
         android:id="@+id/ownProfilePage"
@@ -84,5 +87,16 @@
         <action
             android:id="@+id/action_registrationSecondFragment_to_registrationPage"
             app:destination="@id/registrationPage" />
+    </fragment>
+    <fragment
+        android:id="@+id/chattingFragment"
+        android:name="com.example.myapplication.fragments.ChattingFragment"
+        android:label="ChattingFragment" >
+        <action
+            android:id="@+id/action_chattingFragment_to_ownProfilePage"
+            app:destination="@id/ownProfilePage" />
+        <action
+            android:id="@+id/action_chattingFragment_to_chatsPage"
+            app:destination="@id/chatsPage" />
     </fragment>
 </navigation>

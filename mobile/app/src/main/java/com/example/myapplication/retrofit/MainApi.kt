@@ -10,6 +10,8 @@ import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Part
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface MainApi {
 
@@ -42,4 +44,11 @@ interface MainApi {
     suspend fun getChats(
         @Header("Authorization") accessToken: String,
     ): List<ChatModel>
+
+    @Headers("Content-Type: application/json")
+    @GET("chat/{chatId}")
+    suspend fun getChatById(
+        @Header("Authorization") accessToken: String,
+        @Path("chatId") chatId: String
+    ): SingleChatModel
 }
