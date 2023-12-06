@@ -20,6 +20,7 @@ class ChatMessageAdapter: ListAdapter<Message, ChatMessageAdapter.Holder>(Compar
         notifyDataSetChanged()
     }
 
+
     inner class Holder(view: View): RecyclerView.ViewHolder(view) {
         private val binding = ChatMessageBinding.bind(view)
 
