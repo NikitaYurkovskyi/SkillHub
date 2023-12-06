@@ -56,18 +56,6 @@
                 app:layout_constraintStart_toStartOf="@+id/senderName"
                 app:layout_constraintTop_toBottomOf="@+id/senderName" />
 
-            <TextView
-                android:id="@+id/sendingTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
-                android:layout_marginEnd="4dp"
-                android:fontFamily="@font/montserrat_regular"
-                android:text="16:40"
-                android:textColor="#ffffff"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/messageBody" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,19 +10,20 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.BuildConfig
 import com.example.myapplication.R
-import com.example.myapplication.adapter.ChatAdapter
 import com.example.myapplication.adapter.ChatMessageAdapter
 import com.example.myapplication.classes.Chat
 import com.example.myapplication.classes.TokenManager
 import com.example.myapplication.classes.UserModel
 import com.example.myapplication.databinding.ChattingFragmentBinding
-import com.example.myapplication.retrofit.ChatModel
 import com.example.myapplication.retrofit.Message
 import com.example.myapplication.retrofit.RetrofitInit
 import com.example.myapplication.retrofit.SingleChatModel
+import com.example.myapplication.singleton.SocketHandler
+import io.socket.client.Socket
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.json.JSONObject
 
 
 class ChattingFragment : Fragment() {
@@ -39,6 +40,11 @@ class ChattingFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = ChattingFragmentBinding.inflate(inflater, container, false)
+        tokenManager = TokenManager(requireContext())
+
+        SocketHandler.setSocket(tokenManager.retrieveTokens().first.toString())
+        SocketHandler.establishConnection()
+
         return binding.root
     }
 
@@ -52,27 +58,68 @@ class ChattingFragment : Fragment() {
         retrofitInit = RetrofitInit()
         tokenManager = TokenManager(requireContext())
         chatMessageAdapter = ChatMessageAdapter()
+        val mSocket = SocketHandler.getSocket()
         initRcView()
+
+
         binding.apply {
             var controller = findNavController()
-            navToChatPageBtn.setOnClickListener{
+
+            CoroutineScope(Dispatchers.IO).launch {
+
+            }
+
+            navToChatPageBtn.setOnClickListener {
                 controller.navigate(R.id.chatsPage)
             }
 
-            navToOwnProfilePageBtn.setOnClickListener{
+            navToOwnProfilePageBtn.setOnClickListener {
                 controller.navigate(R.id.ownProfilePage)
             }
+            sendMessageBtn.setOnClickListener{
+                CoroutineScope(Dispatchers.IO).launch {
+                    val chatModel = getChatById()
+                    requireActivity().runOnUiThread{
+                        val messageText = messageTextEdit.text.toString()
+                        if (chatModel != null) {
+                            SocketHandler.sendMessage(messageText, chatModel.id)
+                        }
+                        messageTextEdit.setText("")
+
+                        CoroutineScope(Dispatchers.IO).launch {
+                            val chat = Chat()
+                            val messages =
+                                chat.getMessageOfChatById(retrofitInit, baseURL, tokenManager, chatId)
+                            requireActivity().runOnUiThread {
+                                if (chatModel != null) {
+                                    chatMessageAdapter.submitList(messages)
+                                    chatMessageAdapter.notifyDataSetChanged()
+                                }
+                            }
+                        }
+                    }
+                }
 
 
-            CoroutineScope(Dispatchers.IO).launch{
+            }
+
+            CoroutineScope(Dispatchers.IO).launch {
                 val chatModel = getChatById()
                 val chat = Chat()
-                val messages = chat.getMessageOfChatById(retrofitInit, baseURL, tokenManager, chatId)
-                requireActivity().runOnUiThread{
+                val messages =
+                    chat.getMessageOfChatById(retrofitInit, baseURL, tokenManager, chatId)
+                requireActivity().runOnUiThread {
                     if (chatModel != null) {
-                        messages?.get(1)?.let { Log.i("Messages", it.text) }
+                        messages?.let {
+                            if (it.isNotEmpty()) {
+                                it[0]?.let { message ->
+                                    Log.i("Messages", message.text)
+                                }
+                            }
+                        }
+
                         chatMessageAdapter.submitList(chatModel.messages)
-                        chattingUsername.text = chatModel.chatMembers[0].user.nickname
+                        chattingUsername.text = chatModel.chatMembers[1].user.nickname
                     }
                 }
                 val userModel: UserModel = UserModel()
@@ -84,22 +131,56 @@ class ChattingFragment : Fragment() {
                 }
             }
         }
+        mSocket?.on("newMessage"){ args ->
+            try {
+                Log.i("Socket", "newMessage triggered")
+                val messageJson = args[0] as JSONObject
+                Log.i("Socket", messageJson.toString())
+                CoroutineScope(Dispatchers.IO).launch {
+                    val chatModel = getChatById()
+                    val chat = Chat()
+                    val messages =
+                        chat.getMessageOfChatById(retrofitInit, baseURL, tokenManager, chatId)
+                    requireActivity().runOnUiThread {
+                        if (chatModel != null) {
+                            messages?.get(1)?.let { Log.i("Messages", it.text) }
+                            chatMessageAdapter.submitList(chatModel.messages)
+                            chatMessageAdapter.notifyDataSetChanged()
+                        }
+                    }
+                }
+
+            } catch (e: Exception) {
+                Log.e("Socket", "Listening newMessage exception: $e")
+            }
+        }
+
 
     }
 
-    private suspend fun getChatById(): SingleChatModel?{
-        var chat = Chat()
-        return chat.getChatById(retrofitInit, baseURL, tokenManager, chatId)
+    override fun onDestroy() {
+        super.onDestroy()
+        SocketHandler.closeConnection()
     }
 
-    private fun initRcView() = with(binding){
-        chatMessageAdapter = ChatMessageAdapter()
-        chattingRecycleView.layoutManager = LinearLayoutManager(context)
-        chattingRecycleView.adapter = chatMessageAdapter
+    private suspend fun getChatById(): SingleChatModel? {
+         var chat = Chat()
+         return chat.getChatById(retrofitInit, baseURL, tokenManager, chatId)
     }
+
+        private fun initRcView() = with(binding) {
+            chatMessageAdapter = ChatMessageAdapter()
+            chattingRecycleView.layoutManager = LinearLayoutManager(context)
+            chattingRecycleView.adapter = chatMessageAdapter
+        }
 
     private fun updateAdapterList(newList: List<Message>) {
         chatMessageAdapter.submitList(newList)
+        requireActivity().runOnUiThread {
+            chatMessageAdapter.notifyDataSetChanged()
+        }
     }
+
+
 
 }

@@ -5,6 +5,8 @@ import com.example.myapplication.retrofit.ChatModel
 import com.example.myapplication.retrofit.Message
 import com.example.myapplication.retrofit.RetrofitInit
 import com.example.myapplication.retrofit.SingleChatModel
+import io.socket.client.Socket
+import org.json.JSONObject
 
 class Chat {
 
@@ -72,5 +74,4 @@ class Chat {
             return null
         }
     }
-
 }

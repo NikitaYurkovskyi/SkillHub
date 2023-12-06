@@ -16,6 +16,7 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "BASE_URL", "\"http://10.0.2.2:3000/api/\"")
+        buildConfigField("String", "SOCKET_URL", "\"http://10.0.2.2:3000/message\"")
     }
 
     buildFeatures {
@@ -51,11 +52,17 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
+    implementation("io.socket:socket.io-client:2.0.0")
+    implementation("io.socket:engine.io-client:2.0.0")
+
+
     implementation("com.squareup.okhttp3:logging-interceptor:4.7.2")
     implementation("com.squareup.okhttp3:okhttp:4.7.2")
 
     implementation("androidx.navigation:navigation-fragment-ktx:2.5.2")
     implementation("androidx.navigation:navigation-ui-ktx:2.5.2")
+    implementation ("com.squareup.okhttp3:okhttp:4.9.1")
+
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")

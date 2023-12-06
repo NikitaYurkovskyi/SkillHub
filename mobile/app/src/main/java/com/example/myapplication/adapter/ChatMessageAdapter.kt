@@ -10,6 +10,9 @@ import com.example.myapplication.R
 import com.example.myapplication.databinding.ChatMessageBinding
 import com.example.myapplication.databinding.OwnMessageBinding
 import com.example.myapplication.retrofit.Message
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class ChatMessageAdapter: ListAdapter<Message, ChatMessageAdapter.Holder>(Comparator()) {
 
@@ -19,6 +22,7 @@ class ChatMessageAdapter: ListAdapter<Message, ChatMessageAdapter.Holder>(Compar
         this.nickname = nickname
         notifyDataSetChanged()
     }
+
 
     inner class Holder(view: View): RecyclerView.ViewHolder(view) {
         private val binding = ChatMessageBinding.bind(view)
@@ -33,6 +37,7 @@ class ChatMessageAdapter: ListAdapter<Message, ChatMessageAdapter.Holder>(Compar
                 senderName.visibility = View.VISIBLE
                 senderName.text = message.user.nickname
             }
+
         }
     }
 
