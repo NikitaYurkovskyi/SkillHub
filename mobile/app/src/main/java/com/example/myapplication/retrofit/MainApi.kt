@@ -51,4 +51,37 @@ interface MainApi {
         @Header("Authorization") accessToken: String,
         @Path("chatId") chatId: String
     ): SingleChatModel
+
+    @Headers("Content-Type: application/json")
+    @POST("forum")
+    suspend fun createForum (
+        @Header("Authorization") accessToken: String,
+        @Body forumDto: CreateForumDto
+    ): Response <ForumDto>
+
+    @Headers("Content-Type: application/json")
+    @GET("forum")
+    suspend fun getAllForums (
+        @Header("Authorization") accessToken: String
+    ): List<GetForumsDto>
+
+    @Headers("Content-Type: application/json")
+    @POST("/api/forum/{id}/join")
+    suspend fun joinForum(
+        @Header("Authorization") accessToken: String,
+        @Path("id") id: String
+    )
+
+    @Headers("Content-Type: application/json")
+    @GET("/api/forum/all-my-forums")
+    suspend fun getAllMyForums(
+        @Header("Authorization") accessToken: String
+    ): List<GetAllMyForumsDto>
+
+    @Headers("Content-Type: application/json")
+    @GET("/api/forum/{id}")
+    suspend fun getForumInfo(
+        @Header("Authorization") accessToken: String,
+        @Path("id") id: String
+    ): Response<GetForumDto>
 }

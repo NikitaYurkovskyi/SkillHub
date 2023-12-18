@@ -38,11 +38,11 @@
             android:id="@+id/action_chatsPage_to_ownProfilePage"
             app:destination="@id/ownProfilePage" />
         <action
-            android:id="@+id/action_chatsPage_to_correspondenceFragment2"
-            app:destination="@id/correspondenceFragment2" />
-        <action
             android:id="@+id/action_chatsPage_to_chattingFragment"
             app:destination="@id/chattingFragment" />
+        <action
+            android:id="@+id/action_chatsPage_to_forumFragment"
+            app:destination="@id/forumFragment" />
     </fragment>
     <fragment
         android:id="@+id/ownProfilePage"
@@ -73,6 +73,12 @@
         android:name="com.example.myapplication.fragments.CorrespondenceFragment"
         android:label="CorrespondenceFragment" >
         <action
+            android:id="@+id/action_correspondenceFragment2_to_forumFragment"
+            app:destination="@id/forumFragment" />
+        <action
+            android:id="@+id/action_correspondenceFragment2_to_chatsPage"
+            app:destination="@id/chatsPage" />
+        <action
             android:id="@+id/action_correspondenceFragment2_to_ownProfilePage"
             app:destination="@id/ownProfilePage" />
     </fragment>
@@ -98,5 +104,62 @@
         <action
             android:id="@+id/action_chattingFragment_to_chatsPage"
             app:destination="@id/chatsPage" />
+        <action
+            android:id="@+id/action_chattingFragment_to_forumFragment"
+            app:destination="@id/forumFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/forumFragment"
+        android:name="com.example.myapplication.fragments.ForumFragment"
+        android:label="fragment_forum"
+        tools:layout="@layout/fragment_forum" >
+        <action
+            android:id="@+id/action_forumFragment_to_chatsPage"
+            app:destination="@id/chatsPage" />
+        <action
+            android:id="@+id/action_forumFragment_to_ownProfilePage"
+            app:destination="@id/ownProfilePage" />
+        <action
+            android:id="@+id/action_forumFragment_to_createForumFragment"
+            app:destination="@id/createForumFragment" />
+        <action
+            android:id="@+id/action_forumFragment_to_allForumsFragment"
+            app:destination="@id/allForumsFragment" />
+        <action
+            android:id="@+id/action_forumFragment_to_correspondenceFragment2"
+            app:destination="@id/correspondenceFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/createForumFragment"
+        android:name="com.example.myapplication.fragments.CreateForumFragment"
+        android:label="fragment_create_forum"
+        tools:layout="@layout/fragment_create_forum" >
+        <action
+            android:id="@+id/action_createForumFragment_to_forumFragment"
+            app:destination="@id/forumFragment" />
+        <action
+            android:id="@+id/action_createForumFragment_to_chatsPage"
+            app:destination="@id/chatsPage" />
+        <action
+            android:id="@+id/action_createForumFragment_to_ownProfilePage"
+            app:destination="@id/ownProfilePage" />
+    </fragment>
+    <fragment
+        android:id="@+id/allForumsFragment"
+        android:name="com.example.myapplication.fragments.AllForumsFragment"
+        android:label="fragment_all_forums"
+        tools:layout="@layout/fragment_all_forums" >
+        <action
+            android:id="@+id/action_allForumsFragment_to_chatsPage"
+            app:destination="@id/chatsPage" />
+        <action
+            android:id="@+id/action_allForumsFragment_to_ownProfilePage"
+            app:destination="@id/ownProfilePage" />
+        <action
+            android:id="@+id/action_allForumsFragment_to_forumFragment"
+            app:destination="@id/forumFragment" />
+        <action
+            android:id="@+id/action_allForumsFragment_to_correspondenceFragment2"
+            app:destination="@id/correspondenceFragment2" />
     </fragment>
 </navigation>

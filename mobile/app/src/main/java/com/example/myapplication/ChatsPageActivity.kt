@@ -20,7 +20,7 @@ class ChatsPageActivity : AppCompatActivity() {
 
         //binding.userInfoContainer.layoutManager = LinearLayout(this)
 
-        var ownProfileButton = binding.viewOwnProfile
+        var ownProfileButton = binding.correspondenceGoToOwnProfile
         ownProfileButton.setOnClickListener{
             var intent = Intent(this, OwnProfilePageActivity::class.java)
             startActivity(intent)

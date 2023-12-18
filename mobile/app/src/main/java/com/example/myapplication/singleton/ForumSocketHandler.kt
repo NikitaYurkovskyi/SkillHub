@@ -2,34 +2,34 @@ package com.example.myapplication.singleton
 
 import android.util.Log
 import com.example.myapplication.BuildConfig
-import com.example.myapplication.retrofit.Message
 import io.socket.client.IO
 import io.socket.client.Socket
-import io.socket.emitter.Emitter
-import org.json.JSONException
-import java.net.URISyntaxException
-import java.util.Collections.singletonList
-import java.util.Collections.singletonMap
 import org.json.JSONObject
+import java.net.URISyntaxException
+import java.util.Collections
 
-
-object SocketHandler {
+object ForumSocketHandler {
     private var mSocket: Socket? = null
 
     @Synchronized
-    fun setSocket(accessToken: String){
+    fun setForumSocket(accessToken: String){
         try {
             Log.i("Socket", "Access Token: $accessToken")
             var options = IO.Options
                 .builder()
-                .setExtraHeaders(singletonMap("authorization", singletonList("Bearer $accessToken")))
+                .setExtraHeaders(
+                    Collections.singletonMap(
+                        "authorization",
+                        Collections.singletonList("Bearer $accessToken")
+                    )
+                )
                 .build()
 
-            mSocket = IO.socket(BuildConfig.SOCKET_URL, options)
+            mSocket = IO.socket(BuildConfig.FORUM_SOCKET_URL, options)
 
             mSocket?.on(Socket.EVENT_CONNECT) {
                 val authorization = "Bearer $accessToken"
-                Log.i("Socket", "Socket has been connected")
+                Log.i("Socket", "Forum socket has been connected")
 
             }
             //mSocket?.on("newMessage", onNewMessage()) // Fix: Use onNewMessage() as the callback
@@ -44,7 +44,6 @@ object SocketHandler {
             Log.e("Socket", "Exception: ${e.message}")
         }
     }
-
 
     @Synchronized
     fun establishConnection(){
@@ -61,19 +60,17 @@ object SocketHandler {
         return mSocket
     }
 
+
     @Synchronized
-    fun sendMessage(messageText: String, chatId: String) {
+    fun sendForumMessage(messageText: String, forumId: String) {
         try {
             val jsonObject = JSONObject().put("text", messageText)
-            jsonObject.put("chatId", chatId)
+            jsonObject.put("forumId", forumId)
 
-            mSocket?.emit("newMessage", jsonObject.toString())
-        } catch (e: Exception) {
-            Log.e("Socket", e.toString())
+            mSocket?.emit("newMessage", jsonObject)
+            Log.i("Socket", "Message was send")
+        } catch (e: Error) {
+            Log.e("Forum", e.toString())
         }
     }
-
-
-
-
 }

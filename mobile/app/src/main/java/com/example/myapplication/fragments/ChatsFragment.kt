@@ -64,7 +64,7 @@ class ChatsFragment : Fragment() {
         }
 
         binding.apply {
-            var ownProfileButton = viewOwnProfile
+            var ownProfileButton = correspondenceGoToOwnProfile
             var goToForumButton = goToForumBtn
             var controller = findNavController()
 
@@ -73,7 +73,7 @@ class ChatsFragment : Fragment() {
             }
 
             goToForumButton.setOnClickListener{
-                controller.navigate(R.id.correspondenceFragment2)
+                controller.navigate(R.id.forumFragment)
             }
 
         }

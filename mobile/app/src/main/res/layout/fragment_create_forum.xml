@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#101010"
+    tools:context=".fragments.CreateForumFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="#1D1D1D"
+            android:backgroundTint="#1D1D1D"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/goToChatPage"
+            android:layout_width="57dp"
+            android:layout_height="38.15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.18"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/toolbar5"
+            app:layout_constraintVertical_bias="0.461"
+            app:srcCompat="@drawable/forum_icon" />
+
+        <ImageView
+            android:id="@+id/goToForumPage"
+            android:layout_width="38dp"
+            android:layout_height="34dp"
+            app:layout_constraintBottom_toBottomOf="@+id/toolbar5"
+            app:layout_constraintEnd_toEndOf="@+id/toolbar5"
+            app:layout_constraintHorizontal_bias="0.525"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/toolbar5"
+            app:layout_constraintVertical_bias="0.4"
+            app:srcCompat="@drawable/chat_icon" />
+
+        <ImageView
+            android:id="@+id/goToOwnProfilePage"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:layout_marginEnd="52dp"
+            app:layout_constraintBottom_toBottomOf="@+id/toolbar5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.83"
+            app:layout_constraintStart_toStartOf="@+id/toolbar4"
+            app:layout_constraintTop_toTopOf="@+id/toolbar5"
+            app:layout_constraintVertical_bias="0.222"
+            app:srcCompat="@drawable/profile_icon" />
+
+        <EditText
+            android:id="@+id/createForumTitile"
+            android:layout_width="228dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="244dp"
+            android:background="@drawable/own_profile_editing_edit_text_style"
+            android:ems="10"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:inputType="text"
+            android:textColor="#ffffff"
+            app:layout_constraintBottom_toTopOf="@+id/toolbar5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.06" />
+
+        <EditText
+            android:id="@+id/createForumDescription"
+            android:layout_width="228dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="64dp"
+            android:background="@drawable/own_profile_editing_edit_text_style"
+            android:ems="10"
+            android:fontFamily="@font/montserrat_bold"
+            android:inputType="text"
+            android:textColor="#ffff"
+            app:layout_constraintEnd_toEndOf="@+id/createForumTitile"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/createForumTitile"
+            app:layout_constraintTop_toBottomOf="@+id/createForumTitile" />
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="Forum title:"
+            android:textColor="#ffff"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/createForumTitile"
+            app:layout_constraintStart_toStartOf="@+id/createForumTitile"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.917" />
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="Forum description:"
+            android:textColor="#ffff"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/createForumDescription"
+            app:layout_constraintTop_toBottomOf="@+id/createForumTitile" />
+
+        <Button
+            android:id="@+id/createForumBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="63dp"
+            android:backgroundTint="#939191"
+            android:text="Create"
+            app:layout_constraintEnd_toEndOf="@+id/createForumDescription"
+            app:layout_constraintStart_toStartOf="@+id/createForumDescription"
+            app:layout_constraintTop_toBottomOf="@+id/createForumDescription" />
+
+        <TextView
+            android:id="@+id/forumCreateErrorString"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="TextView"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="18sp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="@+id/createForumDescription"
+            app:layout_constraintStart_toStartOf="@+id/createForumDescription"
+            app:layout_constraintTop_toBottomOf="@+id/createForumDescription" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
