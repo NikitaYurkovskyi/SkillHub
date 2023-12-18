@@ -11,9 +11,14 @@ import com.example.myapplication.retrofit.GetAllMyForumsDto
 class GetAllMyForumsAdapter : ListAdapter<GetAllMyForumsDto, GetAllMyForumsAdapter.Holder>(Comparator()) {
 
     private lateinit var onForumClickListener: (String) -> Unit
+    private lateinit var onLeaveBtnClickListener: (String) -> Unit
 
     fun setOnForumClickListener(onForumClickListener: (String) -> Unit) {
         this.onForumClickListener = onForumClickListener
+    }
+
+    fun setOnLeaveForumClickListener (onLeaveBtnClick: (String) -> Unit) {
+        this.onLeaveBtnClickListener = onLeaveBtnClick
     }
 
     inner class Holder(view: View) : RecyclerView.ViewHolder(view) {
@@ -23,6 +28,7 @@ class GetAllMyForumsAdapter : ListAdapter<GetAllMyForumsDto, GetAllMyForumsAdapt
             allForumsForumTitle.text = getAllMyForumsDto.theme
             allForumsForumDescription.text = getAllMyForumsDto.description
 
+            leaveForumBtn.setOnClickListener {onLeaveBtnClickListener(getAllMyForumsDto.id)}
             itemView.setOnClickListener { onForumClickListener(getAllMyForumsDto.id) }
         }
     }

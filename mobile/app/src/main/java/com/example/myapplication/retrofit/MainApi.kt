@@ -84,4 +84,11 @@ interface MainApi {
         @Header("Authorization") accessToken: String,
         @Path("id") id: String
     ): Response<GetForumDto>
+
+    @Headers("Content-Type: application/json")
+    @POST("/api/forum/{id}/leave")
+    suspend fun leaveForum (
+        @Header("Authorization") accessToken: String,
+        @Path("id") id: String
+    )
 }

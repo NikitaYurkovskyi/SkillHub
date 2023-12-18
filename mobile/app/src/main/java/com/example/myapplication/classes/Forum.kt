@@ -134,4 +134,24 @@ class Forum{
 
         return null
     }
+
+    suspend fun leaveForum (
+        tokenManager: TokenManager,
+        retrofitInit: RetrofitInit,
+        baseURL: String,
+        forumId: String
+    ) {
+        retrofitInit.initRetrofit(baseURL)
+        try {
+            val tokensPair = tokenManager.retrieveTokens()
+            val accessToken = "Bearer " + tokensPair.first
+            val refreshToken = "Bearer " + tokensPair.second
+            if (accessToken.isNotEmpty() || refreshToken.isNotEmpty()) {
+                retrofitInit.mainApi.leaveForum(accessToken, forumId)
+            }
+        } catch (e: Exception) {
+            Log.e("Forum", e.toString())
+            e.printStackTrace()
+        }
+    }
 }

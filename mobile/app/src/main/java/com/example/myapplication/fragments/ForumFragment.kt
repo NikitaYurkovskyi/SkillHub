@@ -2,6 +2,7 @@ package com.example.myapplication.fragments
 
 import GetAllMyForumsAdapter
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -75,6 +76,15 @@ class ForumFragment : Fragment() {
 
             var controller = findNavController()
             controller.navigate(R.id.correspondenceFragment2, bundle)
+        }
+
+        getAllMyForumsAdapter.setOnLeaveForumClickListener {forumId ->
+            CoroutineScope(Dispatchers.IO).launch {
+                forum.leaveForum(tokenManager, retrofitInit, baseURL, forumId)
+                requireActivity().runOnUiThread {
+                    submitAllMyForumsList(retrofitInit, baseURL, tokenManager)
+                }
+            }
         }
     }
 
